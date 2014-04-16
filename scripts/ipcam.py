@@ -13,9 +13,10 @@ import camera_info_manager
 import argparse
 
 class IPCam(object):
-    def __init__(self, url):
+    def __init__(self, url, config):
         try:
             self.stream=urllib.urlopen(url)
+            rospy.loginfo('Opened camera stream: ' + str(url))
         except:
             rospy.logerr('Unable to open camera stream: ' + str(url))
             sys.exit() #'Unable to open camera stream')
@@ -24,7 +25,7 @@ class IPCam(object):
         self.height = 480
         self.frame_id = 'camera'
         self.image_pub = rospy.Publisher("camera/image_raw", Image)
-        self.cinfo = camera_info_manager.CameraInfoManager(cname = 'camera', url = 'PACKAGE://ipcam/config/calibration.yaml')
+        self.cinfo = camera_info_manager.CameraInfoManager(cname = 'camera', url = config)
         self.cinfo.loadCameraInfo()         # required before getCameraInfo()
         self.caminfo_pub = rospy.Publisher("camera/camera_info", CameraInfo)
         self.bridge = CvBridge()
@@ -40,12 +41,13 @@ class IPCam(object):
 
 def main():
     parser = argparse.ArgumentParser(prog='ipcam.py', description='reads a given url string and dumps it to a ros_image topic')
-    parser.add_argument('-g', '--gui', action='store_true', help='show a GUI of the camera stream')
+    parser.add_argument('-g', '--gui', action='store_true', help='show a GUI of the camera stream') 
+    parser.add_argument('-c', '--config', default='PACKAGE://ipcam/config/calibration.yaml', help='camera calibration file location') 
     parser.add_argument('url', help='camera stream url to parse')
     args, unknown = parser.parse_known_args()
     
     rospy.init_node('ip_camera', anonymous=True)
-    ipcam = IPCam(args.url)
+    ipcam = IPCam(args.url, args.config)
 
     while not rospy.is_shutdown():
         ipcam.bytes += ipcam.stream.read(1024)
@@ -61,11 +63,11 @@ def main():
                 image_message.header.frame_id = ipcam.frame_id
                 ipcam.image_pub.publish(image_message)
                 ipcam.publishCameraInfoMsg()
-                print "height: ", image_message.height
-                print "width: ", image_message.width
-                print "encoding: ", image_message.encoding
-                print "step: ", image_message.step
-                print "header: ", image_message.header
+                #print "height: ", image_message.height
+                #print "width: ", image_message.width
+                #print "encoding: ", image_message.encoding
+                #print "step: ", image_message.step
+                #print "header: ", image_message.header
                 if args.gui:
                     cv2.imshow('IP Camera Input',i)
                 if cv2.waitKey(1) ==27: # wait until ESC key is pressed in the GUI window to stop it
