@@ -42,7 +42,7 @@ class IPCam(object):
 def main():
     parser = argparse.ArgumentParser(prog='ipcam.py', description='reads a given url string and dumps it to a ros_image topic')
     parser.add_argument('-g', '--gui', action='store_true', help='show a GUI of the camera stream') 
-    parser.add_argument('-c', '--config', default='PACKAGE://ipcam/config/calibration.yaml', help='camera calibration file location') 
+    parser.add_argument('-c', '--config', default='PACKAGE://ipcam/config/calibration.yaml', help='camera calibration file URL') 
     parser.add_argument('url', help='camera stream url to parse')
     args, unknown = parser.parse_known_args()
     
