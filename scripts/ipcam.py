@@ -41,7 +41,7 @@ class IPCam(object):
 def main():
     parser = argparse.ArgumentParser(prog='ipcam.py', description='reads a given url string and dumps it to a ros_image topic')
     parser.add_argument('-g', '--gui', action='store_true', help='show a GUI of the camera stream')
-    parser.add_argument('url', required=True, help='camera stream url to parse')
+    parser.add_argument('url', help='camera stream url to parse')
     args, unknown = parser.parse_known_args()
     
     rospy.init_node('ip_camera', anonymous=True)

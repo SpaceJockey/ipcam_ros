@@ -42,19 +42,19 @@ include_directories(
 )
 
 ## Declare a cpp library
-# add_library(spacecam
-#   src/${PROJECT_NAME}/spacecam.cpp
+# add_library(ipcam
+#   src/${PROJECT_NAME}/ipcam.cpp
 # )
 
 ## Declare a cpp executable
-# add_executable(spacecam_node src/spacecam_node.cpp)
+# add_executable(ipcam_node src/ipcam_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(spacecam_node spacecam_generate_messages_cpp)
+# add_dependencies(ipcam_node ipcam_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(spacecam_node
+# target_link_libraries(ipcam_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -68,12 +68,12 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 install(PROGRAMS
-  scripts/spacecam.py
+  scripts/ipcam.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS spacecam spacecam_node
+# install(TARGETS ipcam ipcam_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -98,7 +98,7 @@ install(PROGRAMS
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_spacecam.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_ipcam.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
