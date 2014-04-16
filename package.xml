@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>spacecam</name>
+  <name>ipcam</name>
   <version>0.0.0</version>
-  <description>The spacecam package for SpaceJockey Robot</description>
+  <description>A ROS node for reading images from a mjpeg webcam</description>
 
   <maintainer email="ardyadipta@gmail.com">ardyadipta</maintainer>
 
