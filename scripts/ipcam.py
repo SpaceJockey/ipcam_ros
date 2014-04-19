@@ -24,10 +24,10 @@ class IPCam(object):
         self.width = 640
         self.height = 480
         self.frame_id = 'camera'
-        self.image_pub = rospy.Publisher("camera/image_raw", Image)
+        self.image_pub = rospy.Publisher("/camera/image_raw", Image)
         self.cinfo = camera_info_manager.CameraInfoManager(cname = 'camera', url = config)
         self.cinfo.loadCameraInfo()         # required before getCameraInfo()
-        self.caminfo_pub = rospy.Publisher("camera/camera_info", CameraInfo)
+        self.caminfo_pub = rospy.Publisher("/camera/camera_info", CameraInfo)
         self.bridge = CvBridge()
 
     def publishCameraInfoMsg(self):
